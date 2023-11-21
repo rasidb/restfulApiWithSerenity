@@ -44,32 +44,32 @@ class MyfirsTest {
 
     /**
      *
-     * @param title 
+     * @param title
      * @param body
      * @param userId
      */
     @DisplayName("example post method using csvFileSource annotation")
     @ParameterizedTest()
-    @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1)
-    void postPethod(String title, String body, int userId) {
-        Map<String, Object> reqBody = new HashMap<>();
+    @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1) //hazır csv dosyası kullanarak testi yap ilk satırı atla
+    void postMethod(String title, String body, int userId) {
+        Map<String, Object> reqBody = new HashMap<>(); //request body için Map classından obje oluşturduk hata almamak için jackson bağımlılığını kurmak lazım
         reqBody.put("title", title);
         reqBody.put("body", body);
-        reqBody.put("userId", userId);
+        reqBody.put("userId", userId); //request body oluşturuldu
         given()
-                .accept("application/json")
-                .contentType(ContentType.JSON)
-                .body(reqBody)
+                .accept("application/json") //response json formatında olsun
+                .contentType(ContentType.JSON) //request body'nin formati json
+                .body(reqBody) //request body'miz
         .when()
-                .post("/posts")
+                .post("/posts")//body içerdiği için post methodunu kullandık
         .then()
-                .statusCode(201)
-                .body("title", is(title))
-                .body("body", is(body))
-                .body("userId", is(userId))
+                .statusCode(201)//201 status code başarıyla oluşturuldu
+                .body("title", is(title))//body'nin title keyi ile csv dosyasındaki title'in aynı olduğunu doğrula
+                .body("body", is(body))//body'nin body keyi le csv dosyasının body'sinin aynı olduğunu doğrula
+                .body("userId", is(userId))//body'nin userId keyi ile csv dosyasının userId'sinin aynı olduğunu doğrula
         .extract()
-                .response()
-                .prettyPrint();
+                .response()//response objesine çevir
+                .prettyPrint();//konsola response yazdır
     }
 
 }
