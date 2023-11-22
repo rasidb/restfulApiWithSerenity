@@ -96,7 +96,7 @@ class MyfirsTest {
         assertEquals(pojo.toString(), response.toString()); //response body'nin request body'e eşit olduğunu doğrula
     }
 
-    @DisplayName("basic get method and josnSchema assertion")
+    @DisplayName("basic get method and jsonSchema assertion")
     @ParameterizedTest()
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void singleUserGetMethodSchema(int id) {
