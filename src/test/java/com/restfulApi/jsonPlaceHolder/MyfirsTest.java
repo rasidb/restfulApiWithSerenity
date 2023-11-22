@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -49,7 +50,7 @@ class MyfirsTest {
     @ParameterizedTest()
     @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1)
 //hazır csv dosyası kullanarak testi yap ilk satırı atla
-    void postMethod(String title, String body, int userId) {
+    void postMethod(String title, String body, int userId, int id) {
         Map<String, Object> reqBody = new HashMap<>(); //request body için Map classından obje oluşturduk hata almamak için jackson bağımlılığını kurmak lazım
         reqBody.put("title", title);
         reqBody.put("body", body);
