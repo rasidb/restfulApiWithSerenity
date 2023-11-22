@@ -18,7 +18,6 @@
         <junit.version>5.8.1</junit.version>
     </properties>
 
-
     <build>
         <plugins>
             <!-- Maven Compiler Plugin -->
@@ -32,7 +31,7 @@
                 </configuration>
             </plugin>
 
-            <!--            This is where the report is being generated after the test run -->
+            <!-- Serenity Maven Plugin -->
             <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>
                 <artifactId>serenity-maven-plugin</artifactId>
@@ -61,8 +60,7 @@
     </build>
 
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <!-- RestAssured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -70,7 +68,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
+        <!-- Hamcrest -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -78,51 +76,50 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.10.0</version>
-            <scope>test</scope>
-        </dependency>
-
+        <!-- Jackson Databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.15.1</version>
         </dependency>
 
+        <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.9</version> <!-- veya güncel sürüm -->
+            <version>2.8.9</version>
         </dependency>
 
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId> <!-- bu bağımlılıkla birlikte @getter ve @setter anotasyonlarını ekliyoruz -->
+            <artifactId>lombok</artifactId>
             <version>1.18.26</version>
             <scope>test</scope>
         </dependency>
 
+        <!-- JSON Schema Validator -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>5.3.0</version>
         </dependency>
 
-        <!-- Serenity dependencies -->
+        <!-- Serenity Core -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>
             <version>${serenity.version}</version>
         </dependency>
 
+        <!-- Serenity JUnit 5 Integration -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit5</artifactId>
             <version>${serenity.version}</version>
         </dependency>
-        <!-- JUnit 5 dependencies -->
+
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -136,8 +133,5 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-
-
     </dependencies>
 </project>
