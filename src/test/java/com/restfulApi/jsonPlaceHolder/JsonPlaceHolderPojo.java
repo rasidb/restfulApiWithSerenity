@@ -1,4 +1,4 @@
-package com.RestfulApi.jsonPlaceHolder;
+package com.restfulApi.jsonPlaceHolder;
 
 import lombok.Getter;
 import lombok.Setter;

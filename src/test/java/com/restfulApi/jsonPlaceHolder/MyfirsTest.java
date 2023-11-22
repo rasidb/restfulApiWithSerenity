@@ -1,24 +1,27 @@
-package com.RestfulApi.jsonPlaceHolder;
+package com.restfulApi.jsonPlaceHolder;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MyfirsTest {
     @BeforeAll
-    static void init() {
-        RestAssured.baseURI = "https://jsonplaceholder.typicode.com/";
+    static void init() {RestAssured.baseURI = "https://jsonplaceholder.typicode.com/";
     }
 
     @DisplayName("basic get method and using pathparam")  //testimiz hakkında genel bilgi
@@ -44,7 +47,8 @@ class MyfirsTest {
 
     @DisplayName("example post method using csvFileSource annotation")
     @ParameterizedTest()
-    @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1)//hazır csv dosyası kullanarak testi yap ilk satırı atla
+    @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1)
+//hazır csv dosyası kullanarak testi yap ilk satırı atla
     void postMethod(String title, String body, int userId) {
         Map<String, Object> reqBody = new HashMap<>(); //request body için Map classından obje oluşturduk hata almamak için jackson bağımlılığını kurmak lazım
         reqBody.put("title", title);
@@ -64,7 +68,7 @@ class MyfirsTest {
                 .extract()
                 .as(Map.class);
         response.remove("id");
-        Assertions.assertEquals(reqBody, response);
+        assertEquals(reqBody, response);
     }
 
     @DisplayName("basic put method with pojo class")
@@ -80,7 +84,7 @@ class MyfirsTest {
         JsonPlaceHolderPojo response = given()
                 .accept(ContentType.JSON) //response json formatında olsun
                 .contentType(ContentType.JSON) //request body json formatında
-                .pathParam("id",id)
+                .pathParam("id", id)
                 .body(pojo) //body olarak pojo objesini koyduk
                 .log().body() //requestBody yazdır
                 .put("users/{id}") // users/{id} pathini ekle ve put request gönder
@@ -89,6 +93,19 @@ class MyfirsTest {
                 .time(lessThan(6000L)) // value değeri kadar milisaniyeden kısa olduğunu assert et
                 .extract()
                 .as(JsonPlaceHolderPojo.class); //respone'ı pojo objesine dönüştür
-        Assertions.assertEquals(pojo.toString(), response.toString()); //response body'nin request body'e eşit olduğunu doğrula
+        assertEquals(pojo.toString(), response.toString()); //response body'nin request body'e eşit olduğunu doğrula
+    }
+
+    @DisplayName("basic get method and josnSchema assertion")
+    @ParameterizedTest()
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void singleUserGetMethodSchema(int id) {
+     given()
+                .accept("application/json")
+                .pathParam("id", id)
+                .get("posts/{id}")
+                .then()
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/restfulApi/jsonPlaceHolder/JsonPlaceHolderSingleUserSchema.json"))) //jsonSchema doğruluğunu kontrol et
+                .statusCode(200);
     }
 }
