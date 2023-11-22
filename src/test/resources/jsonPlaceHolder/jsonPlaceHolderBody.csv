@@ -1,6 +1,6 @@
-title,body,userId
-patates,kızartmasi,1
-deniz,ask,3
-patlican,közleme,2
-rasid,test,1
-test,api,5
+title,body,userId,id
+patates,kızartmasi,1,3
+deniz,ask,3,5
+patlican,közleme,2,7
+rasid,test,1,10
+test,api,5,11

@@ -60,6 +60,12 @@
             <version>2.8.9</version> <!-- veya güncel sürüm -->
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId> <!-- bu bağımlılıkla birlikte @getter ve @setter anotasyonlarını ekliyoruz -->
+            <version>1.18.26</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 </project>

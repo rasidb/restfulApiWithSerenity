@@ -12,9 +12,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
 
 class MyfirsTest {
     @BeforeAll
@@ -65,6 +67,31 @@ class MyfirsTest {
                 .extract()
                 .as(Map.class);
         response.remove("id");
-        Assertions.assertEquals(reqBody,response);
+        Assertions.assertEquals(reqBody, response);
+    }
+
+    @DisplayName("basic put method with pojo class")
+    @ParameterizedTest()
+    @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1)
+    void putMethod(String title, String body, int userId, int id) {
+        JsonPlaceHolderPojo pojo = new JsonPlaceHolderPojo(); //JsonPlaceHolderPojo classından objeeyi oluşturduk
+        pojo.setBody(body);
+        pojo.setTitle(title);
+        pojo.setUserId(userId);
+        pojo.setId(id);
+        // csv dosyamızda bulunan veriler ile her test için yeniden pojo dosyamızı ayarladık
+        JsonPlaceHolderPojo response = given()
+                .accept(ContentType.JSON) //response json formatında olsun
+                .contentType(ContentType.JSON) //request body json formatında
+                .pathParam("id",id)
+                .body(pojo) //body olarak pojo objesini koyduk
+                .log().body() //requestBody yazdır
+                .put("users/{id}") // users/{id} pathini ekle ve put request gönder
+                .then()
+                .statusCode(200) //status code 200 olduğunu doğrula
+                .time(lessThan(6000L)) // value değeri kadar milisaniyeden kısa olduğunu assert et
+                .extract()
+                .as(JsonPlaceHolderPojo.class); //respone'ı pojo objesine dönüştür
+        Assertions.assertEquals(pojo.toString(), response.toString()); //response body'nin request body'e eşit olduğunu doğrula
     }
 }
