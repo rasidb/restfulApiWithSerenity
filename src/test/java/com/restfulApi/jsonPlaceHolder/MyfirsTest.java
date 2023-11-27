@@ -1,12 +1,14 @@
 package com.restfulApi.jsonPlaceHolder;
 
 import io.restassured.RestAssured;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,14 +17,15 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MyfirsTest {
     @BeforeAll
-    static void init() {RestAssured.baseURI = "https://jsonplaceholder.typicode.com/";
+    static void init() {
+       baseURI = "https://jsonplaceholder.typicode.com/";
     }
 
     @DisplayName("basic get method and using pathparam")  //testimiz hakkında genel bilgi
@@ -109,4 +112,8 @@ class MyfirsTest {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/restfulApi/jsonPlaceHolder/JsonPlaceHolderSingleUserSchema.json"))) //jsonSchema doğruluğunu kontrol et
                 .statusCode(200);
     }
+@Test
+    public void tett(){
+
+}
 }
