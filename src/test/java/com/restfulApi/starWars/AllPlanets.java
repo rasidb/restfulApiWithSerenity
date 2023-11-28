@@ -3,7 +3,9 @@ package com.restfulApi.starWars;
 import net.serenitybdd.junit5.SerenityTest;
 import net.serenitybdd.rest.Ensure;
 import net.serenitybdd.rest.SerenityRest;
+
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
@@ -15,6 +17,7 @@ import static org.hamcrest.Matchers.is;
 
 @SerenityTest
 public class AllPlanets extends StarWars_SetupClass {
+    @DisplayName("get methodu kullanarak tüm gezegenleri listele")
     @Test
     void listAllPlanets() {
         // Gezegen isimlerini içeren bir liste oluşturuyoruz
