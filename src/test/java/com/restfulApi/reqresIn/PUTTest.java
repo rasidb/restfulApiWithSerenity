@@ -1,13 +1,15 @@
 package com.restfulApi.reqresIn;
 
 
+import net.serenitybdd.junit5.SerenityTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import static io.restassured.RestAssured.given;
+import static net.serenitybdd.rest.SerenityRest.given;
 import static org.hamcrest.Matchers.is;
 
+@SerenityTest
  class PUTTest extends ReqresIn_setupClass {
     @DisplayName("Kullanıcı Bilgilerini Güncelle")
     @CsvFileSource(resources = "/reqresIn/singleUserCreateBody.csv", numLinesToSkip = 1)

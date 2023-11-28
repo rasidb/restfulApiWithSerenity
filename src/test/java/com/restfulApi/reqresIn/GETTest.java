@@ -2,6 +2,7 @@ package com.restfulApi.reqresIn;
 import io.restassured.response.Response;
 
 
+import net.serenitybdd.junit5.SerenityTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SerenityTest
  class GETTest extends ReqresIn_setupClass {
     @DisplayName("tek kullanıcının bilgileri")
     @ParameterizedTest()

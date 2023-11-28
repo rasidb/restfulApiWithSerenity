@@ -117,3 +117,9 @@ w
 G.idea/sonarlint/issuestore/0/9/092d836213ce4141a7cf90a35693518ea30009ff,a\4\a497112313776707e20ead1e9cda98d469c4f4b0
 w
 G.idea/sonarlint/issuestore/8/2/824d883573b647dfe8468c9de74d3b3c4bffb032,4\8\48645f608bb65e002c44cd6939a1617889868972
+d
+4src/test/java/com/restfulApi/starWars/OnePlanet.java,7\a\7afe3cac8e4d82cf6ac56e9eac3c535930a15ab5
+i
+9src/test/java/com/restfulApi/starWars/AllPlanetsTest.java,7\5\75d206d44c75de5b9d8d9ed9aa7ef2a0e5c270c7
+h
+8src/test/java/com/restfulApi/starWars/OnePlanetTest.java,d\5\d590f949ee18be11655389d12d3ae516161e2263

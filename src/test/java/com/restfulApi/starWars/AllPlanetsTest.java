@@ -16,7 +16,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 
 @SerenityTest
-public class AllPlanets extends StarWars_SetupClass {
+class AllPlanetsTest extends StarWars_SetupClass {
     @DisplayName("get methodu kullanarak tüm gezegenleri listele")
     @Test
     void listAllPlanets() {

@@ -7,6 +7,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 
 import io.restassured.response.Response;
+import net.serenitybdd.junit5.SerenityTest;
 import net.serenitybdd.rest.Ensure;
 
 
@@ -27,7 +28,8 @@ import static net.serenitybdd.rest.SerenityRest.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-@Disabled
+
+@SerenityTest
 class MyfirsTest {
     @BeforeEach
     void init() {

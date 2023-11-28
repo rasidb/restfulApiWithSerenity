@@ -1,5 +1,6 @@
 package com.restfulApi.starWars;
 
+import net.serenitybdd.junit5.SerenityTest;
 import net.serenitybdd.rest.Ensure;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static net.serenitybdd.rest.SerenityRest.given;
 import static org.hamcrest.Matchers.is;
 
-public class OnePlanet extends StarWars_SetupClass{
+@SerenityTest
+    class OnePlanetTest extends StarWars_SetupClass{
     @DisplayName("tek gezegen bilgilerini al ve yanıt süresini kontrol et")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5})

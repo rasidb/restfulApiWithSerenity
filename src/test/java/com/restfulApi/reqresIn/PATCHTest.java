@@ -4,6 +4,7 @@ package com.restfulApi.reqresIn;
 
 
 
+import net.serenitybdd.junit5.SerenityTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,6 +14,7 @@ import java.util.Map;
 import static net.serenitybdd.rest.SerenityRest.given;
 import static org.hamcrest.Matchers.is;
 
+@SerenityTest
 class PATCHTest extends ReqresIn_setupClass {
     @ValueSource(ints = {1, 2, 3})
     @ParameterizedTest
