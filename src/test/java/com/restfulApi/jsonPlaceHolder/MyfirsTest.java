@@ -8,7 +8,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 import io.restassured.response.Response;
 import net.serenitybdd.rest.Ensure;
-import net.serenitybdd.rest.SerenityRest;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -119,5 +118,6 @@ class MyfirsTest {
                 .then()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/restfulApi/jsonPlaceHolder/JsonPlaceHolderSingleUserSchema.json"))) //jsonSchema doğruluğunu kontrol et
                 .statusCode(200);
+
     }
 }

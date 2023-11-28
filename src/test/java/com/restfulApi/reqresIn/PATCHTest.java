@@ -3,14 +3,14 @@ package com.restfulApi.reqresIn;
 
 
 
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
+import static net.serenitybdd.rest.SerenityRest.given;
 import static org.hamcrest.Matchers.is;
 
 class PATCHTest extends ReqresIn_setupClass {

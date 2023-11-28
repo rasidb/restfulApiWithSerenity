@@ -1,12 +1,12 @@
 package com.restfulApi.starWars;
 
 import net.serenitybdd.rest.Ensure;
-import net.serenitybdd.rest.SerenityRest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static net.serenitybdd.rest.SerenityRest.given;
 import static org.hamcrest.Matchers.is;
 
 public class OnePlanet extends StarWars_SetupClass{
@@ -15,8 +15,7 @@ public class OnePlanet extends StarWars_SetupClass{
     @ValueSource(ints = {1, 2, 3, 4, 5})
     void showOnePlanet(int id) {
         // Belirli bir gezegenin detaylarını almak için bir GET isteği yapın
-        SerenityRest
-                .given()
+        given()
                 .accept("application/json")
                 .pathParam("id", id)
                 .get("/planets/{id}")
