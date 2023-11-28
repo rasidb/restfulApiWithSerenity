@@ -11,14 +11,13 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-
-public class POST extends ReqresIn_setupClass {
+ class POSTTest extends ReqresIn_setupClass {
     @DisplayName("Kullanıcı Oluştur")
     @CsvFileSource(resources = "/reqresIn/singleUserCreateBody.csv",numLinesToSkip = 1)
     @ParameterizedTest
     void kullaniciOlustur(String name, String job) {
         // requestBody bir Map olarak hazırla
-        Map<String, Object> istekGovdesi = new HashMap<>();
+        Map<String, Object> istekGovdesi = new HashMap<String, Object>();
         istekGovdesi.put("name", name);
         istekGovdesi.put("job", job);
 
@@ -40,7 +39,7 @@ public class POST extends ReqresIn_setupClass {
     @ParameterizedTest
     void registerAndLoginSuccessfully(String password) {
         // İstek gövdesini bir Map olarak hazırla
-        Map<String, Object> requestBody = new HashMap<>();
+        Map<String, Object> requestBody = new HashMap<String, Object>();
         requestBody.put("email", "eve.holt@reqres.in");
         requestBody.put("password", password);
 

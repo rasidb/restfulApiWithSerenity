@@ -1,12 +1,10 @@
 package com.restfulApi.reqresIn;
-
-import io.restassured.RestAssured;
-
-import io.restassured.internal.http.HttpResponseException;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
+
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -16,7 +14,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class GET extends ReqresIn_setupClass {
+ class GETTest extends ReqresIn_setupClass {
     @DisplayName("tek kullanıcının bilgileri")
     @ParameterizedTest()
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
@@ -28,6 +26,7 @@ public class GET extends ReqresIn_setupClass {
                 .get("/users")
                 .then().statusCode(200)
                 .time(lessThan(600L));
+
     }
     @DisplayName("farklı sayfalardaki kullanıcı listeleri")
     //status code 200 olmalı

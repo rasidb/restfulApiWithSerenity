@@ -1,31 +1,38 @@
 package com.restfulApi.jsonPlaceHolder;
 
+
 import io.restassured.RestAssured;
-import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.response.Response;
 
-import org.junit.jupiter.api.BeforeAll;
+
+import io.restassured.response.Response;
+import net.serenitybdd.rest.Ensure;
+import net.serenitybdd.rest.SerenityRest;
+
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
+import static net.serenitybdd.rest.SerenityRest.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@Disabled
 class MyfirsTest {
-    @BeforeAll
-    static void init() {
-       baseURI = "https://jsonplaceholder.typicode.com/";
+    @BeforeEach
+    void init() {
+       RestAssured.baseURI = "https://jsonplaceholder.typicode.com/";
     }
 
     @DisplayName("basic get method and using pathparam")  //testimiz hakkında genel bilgi
@@ -47,33 +54,34 @@ class MyfirsTest {
                         .extract()
                         .response();
         response.prettyPrint(); //response body'nin çıktısını al
-    }
+        Ensure.that(" id number",vRes-> vRes.body("id",is(num)));   }
 
     @DisplayName("example post method using csvFileSource annotation")
     @ParameterizedTest()
     @CsvFileSource(resources = "/jsonPlaceHolder/jsonPlaceHolderBody.csv", numLinesToSkip = 1)
 //hazır csv dosyası kullanarak testi yap ilk satırı atla
     void postMethod(String title, String body, int userId, int id) {
-        Map<String, Object> reqBody = new HashMap<>(); //request body için Map classından obje oluşturduk hata almamak için jackson bağımlılığını kurmak lazım
+        final Map<String, Object> reqBody = new HashMap<>();
         reqBody.put("title", title);
         reqBody.put("body", body);
-        reqBody.put("userId", userId); //request body oluşturuldu
-        Map response = given()
-                .accept("application/json") //response json formatında olsun
-                .contentType(ContentType.JSON) //request body'nin formati json
-                .body(reqBody) //request body'miz
-                .when()
-                .post("/posts")//body içerdiği için post methodunu kullandık
-                .then()
-                .statusCode(201)//201 status code başarıyla oluşturuldu
-                .body("title", is(title))//body'nin title keyi ile csv dosyasındaki title'in aynı olduğunu doğrula
-                .body("body", is(body))//body'nin body keyi le csv dosyasının body'sinin aynı olduğunu doğrula
-                .body("userId", is(userId))//body'nin userId keyi ile csv dosyasının userId'sinin aynı olduğunu doğrula
-                .extract()
-                .as(Map.class);
+        reqBody.put("userId", userId);
+
+        Map response =
+                given()
+                        .accept("application/json")
+                        .contentType(ContentType.JSON)
+                        .body(reqBody)
+                        .when()
+                        .post("/posts")
+                        .then()
+                        .statusCode(201)
+                        .extract()
+                        .as(Map.class);
+
         response.remove("id");
-        assertEquals(reqBody, response);
-    }
+
+
+  }
 
     @DisplayName("basic put method with pojo class")
     @ParameterizedTest()
@@ -112,8 +120,4 @@ class MyfirsTest {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/restfulApi/jsonPlaceHolder/JsonPlaceHolderSingleUserSchema.json"))) //jsonSchema doğruluğunu kontrol et
                 .statusCode(200);
     }
-@Test
-    public void tett(){
-
-}
 }

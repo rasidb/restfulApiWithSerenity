@@ -1,14 +1,14 @@
 package com.restfulApi.reqresIn;
 
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class PUT extends ReqresIn_setupClass {
+ class PUTTest extends ReqresIn_setupClass {
     @DisplayName("Kullanıcı Bilgilerini Güncelle")
     @CsvFileSource(resources = "/reqresIn/singleUserCreateBody.csv", numLinesToSkip = 1)
     @ParameterizedTest
