@@ -17,6 +17,7 @@
         <serenity.version>3.6.12</serenity.version>
         <junit.version>5.10.1</junit.version>
         <rest.version>5.3.2</rest.version>
+        <karate.version>1.4.1</karate.version>
     </properties>
 
     <build>
@@ -176,14 +177,14 @@
         <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-core</artifactId>
-            <version>1.4.1</version> <!-- En güncel Karate sürümünü kontrol edin -->
+            <version>${karate.version}</version> <!-- En güncel Karate sürümünü kontrol edin -->
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.intuit.karate</groupId>
             <artifactId>karate-junit5</artifactId>
-            <version>1.4.1</version> <!-- En güncel Karate sürümünü kontrol edin -->
+            <version>${karate.version}</version> <!-- En güncel Karate sürümünü kontrol edin -->
             <scope>test</scope>
         </dependency>
     </dependencies>
